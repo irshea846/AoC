@@ -8,6 +8,24 @@ import java.security.MessageDigest
 fun readInput(name: String) = File("src", "$name.txt")
     .readLines()
 
+fun readListCollection(name: String): List<List<Int>> {
+    val listOfString: List<String> =
+        File("src", "$name.txt").readLines()
+    if (listOfString.isEmpty()) return listOf()
+    var listOfInt: MutableList<Int> = mutableListOf()
+    val listOfListOfInt: MutableList<MutableList<Int>> = MutableList(0) { listOfInt }
+    listOfString.forEach {
+        if (it.isNotEmpty()) {
+            listOfInt.add(it.toInt())
+        } else {
+            listOfListOfInt.add(listOfInt)
+            listOfInt = mutableListOf()
+        }
+    }
+    listOfListOfInt.add(listOfInt)
+    return listOfListOfInt
+}
+
 /**
  * Converts string to md5 hash.
  */
