@@ -26,6 +26,20 @@ fun readListCollection(name: String): List<List<Int>> {
     return listOfListOfInt
 }
 
+fun readListPair(name: String): List<Pair<Char, Char>> {
+    val listOfString: List<String> = readInput(name)
+    var pairOfChar: Pair<Char, Char> = Pair('D', 'U')
+    val listOfPairOfChar: MutableList<Pair<Char, Char>> = MutableList(0) { pairOfChar }
+    listOfString.forEach {
+        if (it.isNotEmpty()) {
+            val listOfChar = it.split(" ")
+            pairOfChar = Pair(listOfChar.first().first(), listOfChar.last().first())
+            listOfPairOfChar.add(pairOfChar)
+        }
+    }
+    return listOfPairOfChar
+}
+
 /**
  * Converts string to md5 hash.
  */
