@@ -5,8 +5,9 @@ import java.security.MessageDigest
 /**
  * Reads lines from the given input txt file.
  */
-fun readInput(name: String) = File("src", "$name.txt")
-    .readLines()
+fun readInput(name: String) : String = File("src", "$name.txt")
+    .readText()
+
 
 fun readListCollection(name: String): List<List<Int>> {
     val listOfString: List<String> =
