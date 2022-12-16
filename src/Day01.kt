@@ -1,29 +1,25 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+    fun part1(input: String): Int {
+        return input.split("\n\n").map { bag ->
+            bag.lines().map {
+                it.toInt()
+            }
+        }.maxOf { it.sum() }
     }
 
-    fun part2(input: List<List<Int>>): Int {
-        return input.size
+    fun part2(input: String): Int {
+        return  input.split("\n\n").map { bag ->
+            bag.split("\n").sumOf {
+                it.toInt()
+            }
+        }.sorted().takeLast(3).sum()
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+    check(part1(testInput) == 24000)
 
-    val input = readListCollection("Day01")
-    val bagsOfCalories: MutableList<Int> = mutableListOf()
-    input.forEach {
-        var sum = 0
-        it.forEach { sum += it }
-        bagsOfCalories.add(sum)
-    }
-    println(bagsOfCalories)
-    bagsOfCalories.sort()
-    var sumOfTop3Bags = 0
-    for (i in bagsOfCalories.size - 1 downTo bagsOfCalories.size -3) {
-        sumOfTop3Bags += bagsOfCalories[i]
-    }
-    println(bagsOfCalories[bagsOfCalories.size - 1])
-    println(sumOfTop3Bags)
+    val input = readInput("Day01")
+    println(part1(input))
+    println(part2(input))
 }
